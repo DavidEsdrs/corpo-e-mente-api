@@ -27,8 +27,6 @@ const getMySchedulesController = new GetMySchedulesController();
 const adminChangeScheduleController = new AdminChangeScheduleController();
 const getScheduleInfoController = new GetScheduleInfoController();
 
-routes.get('/', (req, res) => res.json("Root endpoint reached!"));
-
 routes.post('/user/new', newAccountController.handle);
 
 routes.post('/login', loginController.handle);
