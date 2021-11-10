@@ -8,49 +8,93 @@ import {
     ScheduleController,
     ensureAdmin,
     ensureAuthenticatedUser,
-    UpdateScheduleSituation,
     GetMySchedulesController,
     AdminChangeScheduleController,
-    GetScheduleInfoController
+    GetScheduleInfoController,
+    deleteCancelledAppointments,
+    updateScheduleToConcluded,
+    updateSchedulesSituation
 } from "./index";
 
 const routes = Router();
-const updateSchedulesSituation = new UpdateScheduleSituation();
 
-const newAccountController = new NewAccountController();
-const loginController = new LoginController();
-const scheduleController = new ScheduleController();
-const deleteAllController = new DeleteAllController();
-const changeScheduleController = new ChangeScheduleController();
-const getSchedulesController = new GetSchedulesController();
-const getMySchedulesController = new GetMySchedulesController();
-const adminChangeScheduleController = new AdminChangeScheduleController();
-const getScheduleInfoController = new GetScheduleInfoController();
+class Routes {
+    postNewUser() {
+        const newAccountController = new NewAccountController();
 
-routes.get('/', (req, res) => res.json("Root endpoint reached!"));
+        routes.post('/user/new', newAccountController.handle);
+    }
 
-routes.post('/user/new', newAccountController.handle);
+    postLogin() {
+        const loginController = new LoginController();
 
-routes.post('/login', loginController.handle);
+        routes.post('/login', loginController.handle);
+    }
 
-routes.post('/user/schedules/new', ensureAuthenticatedUser, scheduleController.handle);
+    postNewSchedule() {
+        const scheduleController = new ScheduleController();
 
-routes.delete('/user/schedules', /*ensureAuthenticatedUser, ensureAdmin,*/ deleteAllController.handle);
+        routes.post('/user/schedules/new', ensureAuthenticatedUser, scheduleController.handle);
+    }
 
-routes.get('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, getSchedulesController.handler);
+    deleteAllSchedulesAdmin() {
+        const deleteAllController = new DeleteAllController();
 
-routes.put('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, adminChangeScheduleController.handle);
+        routes.delete('/user/schedules', ensureAuthenticatedUser, ensureAdmin, deleteAllController.handle);
+    }
 
-routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
+    getAllSchedules() {
+        const getSchedulesController = new GetSchedulesController();
 
-routes.get('/user/schedules', ensureAuthenticatedUser, getMySchedulesController.handle);
+        routes.get('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, getSchedulesController.handler);
+    }
 
-routes.get('/user/schedules/:id', ensureAuthenticatedUser, getScheduleInfoController.handle);
+    putChangeScheduleAdmin() {
+        const adminChangeScheduleController = new AdminChangeScheduleController();
 
-const oneDay = 86400000;
+        routes.put('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, adminChangeScheduleController.handle);
+    }
 
-setInterval(updateSchedulesSituation.deleteCancelledAppointments, oneDay);
-setInterval(updateSchedulesSituation.updateSchedulesSituation, oneDay * 2);
-setInterval(updateSchedulesSituation.updateScheduleToConcluded, oneDay * 3);
+    putChangeSchedule() {
+        const changeScheduleController = new ChangeScheduleController();
+
+        routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
+    }
+
+    getSchedules() {
+        const getMySchedulesController = new GetMySchedulesController();
+
+        routes.get('/user/schedules', ensureAuthenticatedUser, getMySchedulesController.handle);
+    }
+
+    getScheduleInfo() { 
+        const getScheduleInfoController = new GetScheduleInfoController();
+
+        routes.get('/user/schedules/:id', ensureAuthenticatedUser, getScheduleInfoController.handle);
+    }
+
+    setObservers() {
+        const oneDay = 86400000;
+
+        setInterval(deleteCancelledAppointments, oneDay);
+        setInterval(updateSchedulesSituation, oneDay * 2);
+        setInterval(updateScheduleToConcluded, oneDay * 3);
+    }
+
+    constructor() {
+        this.postNewUser();
+        this.postLogin();
+        this.postNewSchedule();
+        this.deleteAllSchedulesAdmin();
+        this.getAllSchedules();
+        this.putChangeSchedule();
+        this.putChangeScheduleAdmin();
+        this.getSchedules();
+        this.getScheduleInfo();
+        this.setObservers();
+    }
+}
+
+new Routes();
 
 export { routes }

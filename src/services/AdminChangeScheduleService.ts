@@ -12,7 +12,7 @@ class AdminChangeScheduleService {
     async execute({ schedule_id, situation }: IScheduleChange) {
         const schedulesRepository = getCustomRepository(SchedulesRepository);
 
-        const schedule = await schedulesRepository.findOne(schedule_id);
+        const schedule = await schedulesRepository.findScheduleById(schedule_id);
 
         if(!schedule) {
             throw new InvalidArgumentError("The given schedule id doesn't exist!");
