@@ -27,7 +27,7 @@ class Routes {
 
     postLogin() {
         const loginController = new LoginController();
-
+        
         routes.post('/login', loginController.handle);
     }
 
