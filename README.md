@@ -102,7 +102,7 @@ O id é a primary key de ambos e utilizado para recuperar as informações de um
 ## Utilizando as rotas
 Todos os json a seguir podem ser adicionados no campo Body > Json Content da aplicação de sua preferência (Postman ou Insomnia).
 
-Acesse a rota `localhost:3000/user/new` com o método `POST` para criar um novo usuário recebe o seguinte objeto Json:
+Acesse a rota `localhost:3000/user/new` com o método `POST` para criar um novo usuário, essa rota recebe o seguinte objeto Json:
 ```json
 {
     "name": "Cool Name",
