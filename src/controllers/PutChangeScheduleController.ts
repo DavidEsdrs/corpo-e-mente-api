@@ -2,11 +2,6 @@ import { Request, Response } from "express";
 import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { ChangeScheduleService } from "../services/ChangeScheduleService";
 
-interface IScheduleChangeRequest {
-    applicant: string;
-    schedule_id: string;
-}
-
 class ChangeScheduleController {
     async handle(req: Request, res: Response) {
         const { user_id: applicant } =  req;

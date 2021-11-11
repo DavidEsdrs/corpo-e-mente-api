@@ -1,7 +1,6 @@
-import dateFormat from "dateformat";
 import { Request, Response } from "express";
 import { InvalidArgumentError } from "../errors/HTTPErrors";
-import { ScheduleService, ScheduleSituation } from "../services/ScheduleService";
+import { ScheduleService } from "../services/ScheduleService";
 
 class ScheduleController {
     async handle(req: Request, res: Response) {

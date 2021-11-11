@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { getCustomRepository } from "typeorm";
 import { 
     ChangeScheduleController,
     DeleteAllController,
@@ -14,8 +13,7 @@ import {
     GetScheduleInfoController,
     deleteCancelledAppointments,
     updateScheduleToConcluded,
-    updateSchedulesSituation,
-    GetAllDatesController
+    updateSchedulesSituation
 } from "./index";
 
 const routes = Router();
@@ -63,7 +61,7 @@ class Routes {
         routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
     }
 
-    getSchedules() {
+    getMySchedules() {
         const getMySchedulesController = new GetMySchedulesController();
 
         routes.get('/user/schedules', ensureAuthenticatedUser, getMySchedulesController.handle);
@@ -79,8 +77,8 @@ class Routes {
         const oneDay = 86400000;
 
         setInterval(deleteCancelledAppointments, oneDay);
-        setInterval(updateSchedulesSituation, oneDay * 2);
-        setInterval(updateScheduleToConcluded, oneDay * 3);
+        setInterval(updateSchedulesSituation, oneDay);
+        setInterval(updateScheduleToConcluded, oneDay);
     }
 
     constructor() {
@@ -91,7 +89,7 @@ class Routes {
         this.getAllSchedules();
         this.putChangeSchedule();
         this.putChangeScheduleAdmin();
-        this.getSchedules();
+        this.getMySchedules();
         this.getScheduleInfo();
         this.setObservers();
     }

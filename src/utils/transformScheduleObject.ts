@@ -4,7 +4,7 @@ import { Schedule } from "../entities/Schedule";
 import { User } from "../entities/User";
 import { UsersRepository } from "../repositories/UsersRepository";
 
-export async function transformScheduleObject(schedule: Schedule | any) {
+export async function fixedScheduleObject(schedule: Schedule) {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const schedulesWithUserAsApplicant = {

@@ -1,6 +1,9 @@
+import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
-import { InvalidArgumentError, UnauthorizedRequestError } from "../errors/HTTPErrors";
+import { Schedule } from "../entities/Schedule";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
+import { fixedScheduleObject } from "../utils/transformScheduleObject";
 
 interface IScheduleInfo {
     applicant: string;
@@ -17,7 +20,7 @@ class GetScheduleInfoService {
             throw new InvalidArgumentError("The given schedule id isn't valid!");
         }
 
-        return schedule;
+        return fixedScheduleObject(classToPlain(schedule) as Schedule);
     }
 }
 

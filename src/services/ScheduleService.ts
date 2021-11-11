@@ -1,10 +1,11 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
+import { Schedule } from "../entities/Schedule";
 import { AlreadyScheduledError, InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 import { isValidDate } from "../utils/isValidDate";
 import { isValidSituationState } from "../utils/isValidSituationState";
-import { transformScheduleObject } from "../utils/transformScheduleObject";
+import { fixedScheduleObject } from "../utils/transformScheduleObject";
 
 type ScheduleSituation = "scheduled" | "concluded" | "cancelled" | "awaiting";
 
@@ -36,7 +37,7 @@ class ScheduleService {
 
         await schedulesRepository.save(schedule);
 
-        return transformScheduleObject(classToPlain(schedule));
+        return fixedScheduleObject(classToPlain(schedule) as Schedule);
     }
 }
 

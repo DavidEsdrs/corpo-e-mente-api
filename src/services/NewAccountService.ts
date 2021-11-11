@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
+import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm"
-import { User } from "../entities/User";
 import { EmailAlreadyExistsError } from "../errors/HTTPErrors";
 import { UsersRepository } from "../repositories/UsersRepository";
 
@@ -12,9 +12,7 @@ interface INewUser {
 }
 
 class NewAccountService {
-
     async execute({ name, email, password, admin = false }: INewUser) {
-
         const usersRepository = getCustomRepository(UsersRepository);
 
         const userAlreadyExists = await usersRepository.findOne({ email });
@@ -29,7 +27,7 @@ class NewAccountService {
 
         await usersRepository.save(user);
 
-        return user;
+        return classToPlain(user);
     }
 }
 
