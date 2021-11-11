@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { getCustomRepository } from "typeorm";
 import { 
     ChangeScheduleController,
     DeleteAllController,
@@ -13,7 +14,8 @@ import {
     GetScheduleInfoController,
     deleteCancelledAppointments,
     updateScheduleToConcluded,
-    updateSchedulesSituation
+    updateSchedulesSituation,
+    GetAllDatesController
 } from "./index";
 
 const routes = Router();

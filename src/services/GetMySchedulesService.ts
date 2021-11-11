@@ -1,3 +1,4 @@
+import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 
@@ -7,7 +8,7 @@ class GetMySchedulesService {
 
         const mySchedules = await schedulesRepository.find({ applicant: user_id });
 
-        return mySchedules;
+        return classToPlain(mySchedules);
     }
 }
 

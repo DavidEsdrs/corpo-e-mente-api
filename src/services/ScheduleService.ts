@@ -1,8 +1,10 @@
+import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { AlreadyScheduledError, InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 import { isValidDate } from "../utils/isValidDate";
 import { isValidSituationState } from "../utils/isValidSituationState";
+import { transformScheduleObject } from "../utils/transformScheduleObject";
 
 type ScheduleSituation = "scheduled" | "concluded" | "cancelled" | "awaiting";
 
@@ -16,9 +18,9 @@ class ScheduleService {
     async execute({ applicant, scheduled_date, situation = "scheduled" }: IScheduleAppointment) {
         const schedulesRepository = getCustomRepository(SchedulesRepository);
 
-        const dateAlreadyAgended = await schedulesRepository.findOne({ scheduled_date, situation: "scheduled" });
+        const dateAlreadyScheduled = await schedulesRepository.findOne({ scheduled_date, situation: "scheduled" });
 
-        if(dateAlreadyAgended) {
+        if(dateAlreadyScheduled) {
             throw new AlreadyScheduledError();
         }
 
@@ -34,7 +36,7 @@ class ScheduleService {
 
         await schedulesRepository.save(schedule);
 
-        return schedule;
+        return transformScheduleObject(classToPlain(schedule));
     }
 }
 

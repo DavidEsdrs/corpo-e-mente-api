@@ -1,6 +1,8 @@
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateColumn, Timestamp } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateColumn, Timestamp, getCustomRepository } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
+import { Transform } from "class-transformer";
+import { UsersRepository } from "../repositories/UsersRepository";
 
 @Entity("schedules")
 class Schedule {
@@ -10,7 +12,8 @@ class Schedule {
     @OneToOne(() => User, user => user.id)
     @Column()
     applicant: string;
-
+    
+    @Transform(({ value }) => new Date(value))
     @Column({ type: "varchar" })
     scheduled_date: Timestamp;
 
