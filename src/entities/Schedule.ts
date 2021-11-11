@@ -2,7 +2,6 @@ import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateCo
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
 import { Transform } from "class-transformer";
-import { UsersRepository } from "../repositories/UsersRepository";
 
 @Entity("schedules")
 class Schedule {

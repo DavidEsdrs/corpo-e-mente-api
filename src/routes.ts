@@ -19,54 +19,81 @@ import {
 const routes = Router();
 
 class Routes {
+    /**
+     * Route to create a new user
+     */
     postNewUser() {
         const newAccountController = new NewAccountController();
 
         routes.post('/user/new', newAccountController.handle);
     }
 
+    /**
+     * Route to client login
+     */
     postLogin() {
         const loginController = new LoginController();
         
         routes.post('/login', loginController.handle);
     }
 
+    /**
+     * Route to post a new appointment
+     */
     postNewSchedule() {
         const scheduleController = new ScheduleController();
 
         routes.post('/user/schedules/new', ensureAuthenticatedUser, scheduleController.handle);
     }
 
+    /**
+     * Route available only for admins to delete all the appointments
+     */
     deleteAllSchedulesAdmin() {
         const deleteAllController = new DeleteAllController();
 
         routes.delete('/user/schedules', ensureAuthenticatedUser, ensureAdmin, deleteAllController.handle);
     }
 
+    /**
+     * Route available only for admins for get the schedule
+     */
     getAllSchedules() {
         const getSchedulesController = new GetSchedulesController();
 
         routes.get('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, getSchedulesController.handler);
     }
 
+    /**
+     * Route available only for admins for change any appointment situation
+     */
     putChangeScheduleAdmin() {
         const adminChangeScheduleController = new AdminChangeScheduleController();
 
         routes.put('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, adminChangeScheduleController.handle);
     }
 
+    /**
+     * Route to cancel an appointment
+     */
     putChangeSchedule() {
         const changeScheduleController = new ChangeScheduleController();
 
         routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
     }
 
+    /**
+     * Route to get all appointments of the user
+     */
     getMySchedules() {
         const getMySchedulesController = new GetMySchedulesController();
 
         routes.get('/user/schedules', ensureAuthenticatedUser, getMySchedulesController.handle);
     }
 
+    /**
+     * Route to get a specific appointment
+     */
     getScheduleInfo() { 
         const getScheduleInfoController = new GetScheduleInfoController();
 

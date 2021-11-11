@@ -1,7 +1,6 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
-import { fixedScheduleObject } from "../utils/transformScheduleObject";
 
 class GetMySchedulesService {
     async execute(user_id: string) {

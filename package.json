@@ -1,8 +1,7 @@
 {
-  "name": "clinica",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "schedule-api",
+  "version": "0.1.0",
+  "description": "A simple api used to schedule appointments",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
@@ -10,7 +9,11 @@
     "migration:run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run",
     "schema:drop": "ts-node-dev ./node_modules/typeorm/cli.js schema:drop"
   },
-  "keywords": [],
+  "keywords": [
+    "schedule",
+    "appointments",
+    "api"
+  ],
   "author": "DavidErds",
   "license": "ISC",
   "dependencies": {
