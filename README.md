@@ -1,5 +1,4 @@
-# API feita para ser usada no site da clínica corpo e mente
-
+# Schedule API
 ## Descrição
 <p>
 API que oferece serviços de agendamento de consultas. Os dados do agendamento serão persistidos num banco de dados SQLite. Estes dados podem ser manipulados por usuários administradores e acompanhados por quem agendou.
