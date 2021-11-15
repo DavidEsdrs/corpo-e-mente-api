@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import { GetScheduleInfoService } from "../services/GetScheduleInfoService";
+import { SearchScheduleService } from "../services/SearchSchedulesService";
 
 class GetScheduleInfoController {
     async handle(req: Request, res: Response) {
         const { user_id: applicant } = req;
         const { id: schedule_id } = req.params;
 
-        const getScheduleInfoService = new GetScheduleInfoService();
+        const searchScheduleService = new SearchScheduleService();
 
-        const schedule = await getScheduleInfoService.execute({ applicant, schedule_id });
+        const schedule = await searchScheduleService.execute({ id: schedule_id, applicant, requestApplicant: applicant });
 
         return res.json(schedule);
     }

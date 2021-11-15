@@ -1,13 +1,14 @@
+import { classToPlain } from "class-transformer";
 import { Request, Response } from "express";
-import { GetMySchedulesService } from "../services/GetMySchedulesService";
+import { SearchScheduleService } from "../services/SearchSchedulesService";
 
 class GetMySchedulesController {
     async handle(req: Request, res: Response) {
         const { user_id } = req;
 
-        const getMySchedulesService = new GetMySchedulesService();
+        const searchScheduleService = new SearchScheduleService();
 
-        const mySchedules = await getMySchedulesService.execute(user_id);
+        const mySchedules = classToPlain(await searchScheduleService.execute({ applicant: user_id, requestApplicant: user_id }));
 
         return res.json(mySchedules);
     }

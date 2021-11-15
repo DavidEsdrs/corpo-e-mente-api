@@ -8,13 +8,9 @@ class Schedule {
     @PrimaryColumn()
     readonly id: string;
 
-    @OneToOne(() => User, user => user.id)
-    @Column()
-    applicant: string;
-
     @ManyToOne(() => User)
     @JoinColumn({ name: "applicant" })
-    relatedApplicant: User;
+    applicant: string;
     
     @Transform(({ value }) => new Date(value))
     @Column({ type: "varchar" })

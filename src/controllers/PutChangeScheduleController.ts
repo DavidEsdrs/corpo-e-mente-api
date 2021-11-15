@@ -5,7 +5,7 @@ import { ChangeScheduleService } from "../services/ChangeScheduleService";
 class ChangeScheduleController {
     async handle(req: Request, res: Response) {
         const { user_id: applicant } =  req;
-        const { schedule_id } = req.params;
+        const { id: schedule_id } = req.params;
 
         const changeScheduleService = new ChangeScheduleService();
 
