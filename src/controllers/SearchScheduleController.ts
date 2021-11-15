@@ -9,7 +9,7 @@ class SearchScheduleController {
 
         const service = new SearchScheduleService();
 
-        const schedules = classToPlain(await service.execute({ id, applicant, scheduled_date, situation }, requestApplicant));
+        const schedules = classToPlain(await service.execute({ id, applicant, scheduled_date, situation, requestApplicant }));
 
         return res.json(schedules);
     }
