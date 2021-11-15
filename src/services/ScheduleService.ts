@@ -1,6 +1,5 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
-import { Schedule } from "../entities/Schedule";
 import { AlreadyScheduledError, InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 import { isValidDate } from "../utils/isValidDate";

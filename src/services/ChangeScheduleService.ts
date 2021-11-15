@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
-import { InvalidArgumentError, UnauthorizedRequestError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 
 interface IScheduleChange {
     applicant: string;

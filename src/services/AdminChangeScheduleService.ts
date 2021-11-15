@@ -1,7 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
-import { isValidSituationState } from "../utils/isValidSituationState";
 
 interface IScheduleChange {
     schedule_id: string[];

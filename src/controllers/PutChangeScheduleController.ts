@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { ChangeScheduleService } from "../services/ChangeScheduleService";
 
 class ChangeScheduleController {
