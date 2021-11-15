@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateColumn, Timestamp, getCustomRepository } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn, UpdateDateColumn, Timestamp, getCustomRepository, JoinColumn, ManyToOne } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
 import { Transform } from "class-transformer";
@@ -11,6 +11,10 @@ class Schedule {
     @OneToOne(() => User, user => user.id)
     @Column()
     applicant: string;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: "applicant" })
+    relatedApplicant: User;
     
     @Transform(({ value }) => new Date(value))
     @Column({ type: "varchar" })
