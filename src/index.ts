@@ -11,3 +11,4 @@ export * from "./middlewares/ensureAdmin";
 export * from "./middlewares/ensureAuthenticatedUser";
 export * from "./middlewares/errors";
 export * from "./observers/UpdateScheduleSituation";
+export * from "../src/controllers/SearchScheduleController";

@@ -59,7 +59,7 @@ Em construção
     </li>
 </ul>
 
-## Requisitos para utilizar a API
+## Requisitos para testar a API
 Tenha instalado na sua máquina o NodeJS versão 12 ou mais atual.
 Tenha também instalado um software como Postman ou Insomnia (há também a extensão Thunder Client, do Visual Studio Code) para vizualizar as respostas de cada rota da api. Todos os comando apresentados abaixo podem ser feitos pelo terminal integrando do VS Code.
 

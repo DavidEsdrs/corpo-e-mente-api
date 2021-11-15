@@ -11,6 +11,7 @@ import {
     GetMySchedulesController,
     AdminChangeScheduleController,
     GetScheduleInfoController,
+    SearchScheduleController,
     deleteCancelledAppointments,
     updateScheduleToConcluded,
     updateSchedulesSituation
@@ -79,7 +80,7 @@ class Routes {
     putChangeSchedule() {
         const changeScheduleController = new ChangeScheduleController();
 
-        routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
+        routes.put('/user/schedules/:id', ensureAuthenticatedUser, changeScheduleController.handle);
     }
 
     /**
@@ -98,6 +99,12 @@ class Routes {
         const getScheduleInfoController = new GetScheduleInfoController();
 
         routes.get('/user/schedules/:id', ensureAuthenticatedUser, getScheduleInfoController.handle);
+    }
+
+    getSearchSchedule() {
+        const searchScheduleController = new SearchScheduleController();
+
+        routes.get('/admin/schedules/search', ensureAuthenticatedUser, searchScheduleController.handle);
     }
 
     setObservers() {
@@ -119,6 +126,7 @@ class Routes {
         this.getMySchedules();
         this.getScheduleInfo();
         this.setObservers();
+        this.getSearchSchedule();
     }
 }
 
