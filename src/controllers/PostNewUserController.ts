@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { InvalidArgumentError, NullEmailError, NullPasswordError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { NewAccountService } from "../services/NewAccountService";
 
 interface INewUserRequest {
@@ -18,11 +18,11 @@ class NewAccountController {
         }
 
         if(!email) {
-            throw new NullEmailError();
+            throw new InvalidArgumentError();
         }
 
         if(!password) {
-            throw new NullPasswordError();
+            throw new InvalidArgumentError();
         }
 
         const newAccountService = new NewAccountService();

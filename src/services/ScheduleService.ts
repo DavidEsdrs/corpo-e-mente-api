@@ -1,6 +1,6 @@
 import { classToPlain } from "class-transformer";
 import { getCustomRepository } from "typeorm";
-import { AlreadyScheduledError, InvalidArgumentError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 import { isValidDate } from "../utils/isValidDate";
 import { isValidSituationState } from "../utils/isValidSituationState";
@@ -20,7 +20,7 @@ class ScheduleService {
         const dateAlreadyScheduled = await schedulesRepository.findOne({ scheduled_date, situation: "scheduled" });
 
         if(dateAlreadyScheduled) {
-            throw new AlreadyScheduledError();
+            throw new InvalidArgumentError("The given date is unavailable");
         }
 
         if(!isValidSituationState(situation)) {

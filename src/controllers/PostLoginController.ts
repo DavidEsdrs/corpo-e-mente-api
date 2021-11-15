@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { NullEmailError, NullPasswordError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { LoginService } from "../services/LoginService";
 
 interface ILoginRequest {
@@ -12,11 +12,11 @@ class LoginController {
         const { email, password } = req.body as ILoginRequest;
 
         if(!email) {
-            throw new NullEmailError();
+            throw new InvalidArgumentError();
         }
 
         if(!password) {
-            throw new NullPasswordError();
+            throw new InvalidArgumentError();
         }
 
         const loginService = new LoginService();
