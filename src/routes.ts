@@ -61,7 +61,7 @@ class Routes {
     getAllSchedules() {
         const getSchedulesController = new GetSchedulesController();
 
-        routes.get('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, getSchedulesController.handler);
+        routes.get('/admin/schedules', /*ensureAuthenticatedUser, ensureAdmin,*/ getSchedulesController.handler);
     }
 
     /**
@@ -70,7 +70,7 @@ class Routes {
     putChangeScheduleAdmin() {
         const adminChangeScheduleController = new AdminChangeScheduleController();
 
-        routes.put('/admin/schedules', ensureAuthenticatedUser, ensureAdmin, adminChangeScheduleController.handle);
+        routes.put('/admin/schedules/:id', ensureAuthenticatedUser, ensureAdmin, adminChangeScheduleController.handle);
     }
 
     /**
@@ -79,7 +79,7 @@ class Routes {
     putChangeSchedule() {
         const changeScheduleController = new ChangeScheduleController();
 
-        routes.put('/user/schedules', ensureAuthenticatedUser, changeScheduleController.handle);
+        routes.put('/user/schedules/:id', ensureAuthenticatedUser, changeScheduleController.handle);
     }
 
     /**

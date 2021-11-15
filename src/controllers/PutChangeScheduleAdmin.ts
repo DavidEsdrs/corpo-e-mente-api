@@ -3,7 +3,8 @@ import { AdminChangeScheduleService } from "../services/AdminChangeScheduleServi
 
 class AdminChangeScheduleController {
     async handle(req: Request, res: Response) {
-        const { schedule_id, situation } = req.body;
+        const { situation } = req.body;
+        const { id: schedule_id } = req.params;
 
         const adminChangeScheduleService = new AdminChangeScheduleService();
 
