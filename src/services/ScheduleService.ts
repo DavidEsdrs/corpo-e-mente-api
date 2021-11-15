@@ -5,7 +5,6 @@ import { AlreadyScheduledError, InvalidArgumentError } from "../errors/HTTPError
 import { SchedulesRepository } from "../repositories/SchedulesRepository";
 import { isValidDate } from "../utils/isValidDate";
 import { isValidSituationState } from "../utils/isValidSituationState";
-import { fixedScheduleObject } from "../utils/transformScheduleObject";
 
 type ScheduleSituation = "scheduled" | "concluded" | "cancelled" | "awaiting";
 
@@ -37,7 +36,7 @@ class ScheduleService {
 
         await schedulesRepository.save(schedule);
 
-        return fixedScheduleObject(classToPlain(schedule) as Schedule);
+        return classToPlain(schedule);
     }
 }
 
