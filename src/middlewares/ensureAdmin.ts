@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getCustomRepository } from "typeorm";
-import { UnauthorizedRequestError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 import { UsersRepository } from "../repositories/UsersRepository";
 
 // Verificar se o usuário é um admin
@@ -15,5 +15,5 @@ export async function ensureAdmin(req: Request, res: Response, next: NextFunctio
         return next();
     }
 
-    throw new UnauthorizedRequestError();
+    throw new InvalidArgumentError();
 }

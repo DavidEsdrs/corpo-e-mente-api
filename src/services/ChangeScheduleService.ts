@@ -11,7 +11,12 @@ class ChangeScheduleService {
     async execute({ applicant, schedule_id }: IScheduleChange) {
         const schedulesRepository = getCustomRepository(SchedulesRepository);
 
-        const schedule = await schedulesRepository.findOne({ id: schedule_id, applicant });
+        const schedule = await schedulesRepository.findOne({ 
+            id: schedule_id, 
+            applicant: {
+                id: applicant
+            }
+        });
 
         if(!schedule) {
             throw new InvalidArgumentError("The given schedule id isn't valid!");

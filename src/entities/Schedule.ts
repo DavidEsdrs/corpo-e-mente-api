@@ -10,7 +10,7 @@ class Schedule {
 
     @ManyToOne(() => User)
     @JoinColumn({ name: "applicant" })
-    applicant: string;
+    applicant: User;
     
     @Transform(({ value }) => new Date(value))
     @Column({ type: "varchar" })

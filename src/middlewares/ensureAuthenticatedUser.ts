@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken"
-import { UnauthorizedRequestError } from "../errors/HTTPErrors";
+import { InvalidArgumentError } from "../errors/HTTPErrors";
 
 interface IPayload {
     sub: string;
@@ -10,7 +10,7 @@ export function ensureAuthenticatedUser(req: Request, res: Response, next: NextF
     const authToken = req.headers.authorization;
     
     if(!authToken) {
-        throw new UnauthorizedRequestError();
+        throw new InvalidArgumentError();
     }
 
     const [ , token ] = authToken.split(' ');

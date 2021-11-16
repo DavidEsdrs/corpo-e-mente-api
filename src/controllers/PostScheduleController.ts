@@ -4,7 +4,7 @@ import { ScheduleService } from "../services/ScheduleService";
 
 class ScheduleController {
     async handle(req: Request, res: Response) {
-        const { user_id: applicant } = req;
+        const { user_id } = req;
         const { scheduled_date, situation } = req.body;
 
         if(!scheduled_date) {
@@ -14,7 +14,7 @@ class ScheduleController {
         const scheduleService = new ScheduleService();
 
         const schedule = await scheduleService.execute({
-                applicant, 
+                user_id, 
                 scheduled_date: new Date(scheduled_date).getTime(), 
                 situation 
             }
